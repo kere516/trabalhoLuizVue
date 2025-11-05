@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beach Tennis Courts</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <style>
+
+      * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #2b2b2b;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ff9933 0%, #ffb366 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #b8b8b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #ff9933;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff9933 0%, #ff8800 100%);
+            color: white;
+            padding: 0.7rem 1.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 153, 51, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(255, 153, 51, 0.5);
+            background: linear-gradient(135deg, #ffb366 0%, #ff9933 100%);
+        }
+
+        .hero {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            text-align: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #ff9933;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .lorem-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #666666;
+            margin-bottom: 3rem;
+            text-align: justify;
+        }
+
+        .carousel-section {
+            background: transparent;
+            padding: 4rem 0;
+            margin-top: 3rem;
+        }
+
+        .carousel-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .products-carousel {
+            position: relative;
+            padding: 0 3rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 153, 51, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #ff3333;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-dimensions {
+            font-size: 0.95rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #ff9933 0%, #ff8800 100%);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 153, 51, 0.4);
+        }
+
+        .carousel-nav:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 153, 51, 0.6);
+        }
+
+        .carousel-nav.prev {
+            left: 0;
+        }
+
+        .carousel-nav.next {
+            right: 0;
+        }
+
+        /* Modal de Detalhes */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+            z-index: 10;
+        }
+
+        .modal-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 2rem;
+        }
+
+        .modal-main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .modal-body {
+            padding: 0 2rem 2rem;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .modal-features {
+            background: #f8f8f8;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .modal-features h3 {
+            font-size: 1.3rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .modal-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-features li {
+            padding: 0.5rem 0;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .modal-features li:before {
+            content: "✓ ";
+            color: #ff9933;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .modal-payment {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f8f8;
+            border-radius: 8px;
+        }
+
+        .modal-payment h3 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+            background: #20BA5A;
+        }
+
+        .features {
+            max-width: 1400px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 153, 51, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .feature-description {
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: #b8b8b8;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-image {
+                height: 300px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-images {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <nav>
+                <div class="logo">🏖️ BEACH TENNIS</div>
+                <ul class="nav-links">
+                    <li><a @click="scrollToSection('home')">Início</a></li>
+                    <li><a @click="scrollToSection('quadras')">Quadras</a></li>
+                    <li><a @click="scrollToSection('horarios')">Horários</a></li>
+                    <li><a @click="scrollToSection('contato')">Contato</a></li>
+                </ul>
+                <button class="btn-primary" @click="handleReserva">Reserve Agora</button>
+            </nav>
+        </header>
+
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <img src="https://media.istockphoto.com/id/1325602124/pt/foto/beach-volleyball-court-with-a-volleyball-ball-placed-in-the-sand.jpg?b=1&s=612x612&w=0&k=20&c=8KaviRau22VOBUZWPubuQDpNbRI7tzRcs2YKdj_QQR0=" alt="Beach Tennis Court" class="hero-image">
+                <div class="hero-text">
+                    <h1>{{ hero.title }}</h1>
+                    <p class="subtitle">{{ hero.subtitle }}</p>
+                    
+                    <p class="lorem-text">{{ hero.loremText }}</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="carousel-section" id="quadras">
+            <div class="carousel-container">
+                <h2 class="section-title">Nossas Quadras</h2>
+                
+                <div class="products-carousel">
+                    <div class="products-grid">
+                        <div class="product-card" v-for="(court, index) in courts" :key="index" @click="openModal(court)">
+                            <span class="product-badge" v-if="court.discount">{{ court.discount }}</span>
+                            <img :src="court.image" :alt="court.title" class="product-image">
+                            <div class="product-info">
+                                <h3 class="product-title">{{ court.title }}</h3>
+                                <p class="product-dimensions">16 x 8 metros</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal de Detalhes -->
+        <div class="modal-overlay" v-if="selectedCourt" @click.self="closeModal">
+            <div class="modal-content">
+                <button class="modal-close" @click="closeModal">×</button>
+                
+                <div class="modal-images">
+                    <img :src="selectedCourt.image" :alt="selectedCourt.title" class="modal-main-image">
+                    <img :src="selectedCourt.image2" :alt="selectedCourt.title" class="modal-main-image">
+                </div>
+
+                <div class="modal-body">
+                    <h2 class="modal-title">{{ selectedCourt.title }}</h2>
+                    <p class="modal-description">{{ selectedCourt.fullDescription }}</p>
+
+                    <div class="modal-features">
+                        <h3>Características</h3>
+                        <ul>
+                            <li v-for="(feature, index) in selectedCourt.features" :key="index">{{ feature }}</li>
+                        </ul>
+                    </div>
+
+                    <div class="modal-payment">
+                        <h3>Pronto para reservar?</h3>
+                        <button class="whatsapp-btn" @click="contactWhatsApp(selectedCourt)">
+                            <span>💬</span> Falar com Responsável
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="features" id="horarios">
+            <div class="feature-card" v-for="(feature, index) in features" :key="index">
+                <div class="feature-icon">{{ feature.icon }}</div>
+                <h3 class="feature-title">{{ feature.title }}</h3>
+                <p class="feature-description">{{ feature.description }}</p>
+            </div>
+        </section>
+
+        <footer id="contato">
+            <p>&copy; 2024 Beach Tennis Courts. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    selectedCourt: null,
+                    hero: {
+                        title: 'Quadras',
+                        subtitle: 'Onde o esporte encontra o estilo de vida',
+                        loremText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
+                    },
+                    courts: [
+                        {
+                            title: 'Quadra Premium',
+                            price: 'R$ 120/hora',
+                            rating: '4.9',
+                            discount: '-15%',
+                            image: 'https://media.istockphoto.com/id/1320604444/pt/foto/beach-volleyball-court-with-sand-on-the-ground-and-net-in-city-playground.jpg?s=612x612&w=0&k=20&c=48rJdFX_3F8RKDkOUNxtpWgMMw5W8oatNrUNTNtj0M8=',
+                            image2: 'https://media.istockphoto.com/id/1567274084/pt/foto/white-sand-beach-volleyball-court-white-soft-dunes-fenced-with-nets-the-lines-of-the-playing.jpg?s=612x612&w=0&k=20&c=Oa6zmevB2cYDMPIjWBHxLnbSWWRyqNPLbkavxntKLqw=',
+                            fullDescription: 'Quadra profissional com areia importada de alta qualidade, proporcionando a melhor experiência de jogo. Ideal para treinos e competições.',
+                            features: [
+                                'Areia importada premium',
+                                'Iluminação LED profissional',
+                                'Vestiários com chuveiro',
+                                'Estacionamento privativo',
+                                'Área de descanso coberta'
+                            ],
+                            whatsapp: '5586995797982'
+                        },
+                        {
+                            title: 'Quadra Standard',
+                            price: 'R$ 80/hora',
+                            rating: '4.7',
+                            image: 'https://media.istockphoto.com/id/1567274084/pt/foto/white-sand-beach-volleyball-court-white-soft-dunes-fenced-with-nets-the-lines-of-the-playing.jpg?s=612x612&w=0&k=20&c=Oa6zmevB2cYDMPIjWBHxLnbSWWRyqNPLbkavxntKLqw=',
+                            image2: 'https://media.istockphoto.com/id/1320604444/pt/foto/beach-volleyball-court-with-sand-on-the-ground-and-net-in-city-playground.jpg?s=612x612&w=0&k=20&c=48rJdFX_3F8RKDkOUNxtpWgMMw5W8oatNrUNTNtj0M8=',
+                            fullDescription: 'Quadra completa com boa estrutura, perfeita para jogos recreativos e treinos regulares. Excelente custo-benefício.',
+                            features: [
+                                'Areia de qualidade',
+                                'Iluminação noturna',
+                                'Vestiários básicos',
+                                'Estacionamento disponível',
+                                'Bebedouro'
+                            ],
+                            whatsapp: '5586995797982'
+                        },
+                        {
+                            title: 'Quadra Noturna',
+                            price: 'R$ 100/hora',
+                            rating: '4.8',
+                            discount: '-10%',
+                            image: 'https://media.istockphoto.com/id/1225872726/pt/foto/handball-field-and-yellow-handball-cages-or-handball-goals.jpg?s=612x612&w=0&k=20&c=HQktdvA1mmc05iopLND-p3dQLLMzD3oN0VN-aN31Zx0=',
+                            image2: 'https://media.istockphoto.com/id/2018147746/pt/foto/football-game-football-goal-with-a-net-beach-soccer.jpg?s=612x612&w=0&k=20&c=HGPwx2BF7SZBtiExNB25Pl8_bGW-6241Cjl74NrTU2Q=',
+                            fullDescription: 'Especializada em jogos noturnos com sistema de iluminação de última geração. Perfeita para quem joga após o trabalho.',
+                            features: [
+                                'Iluminação LED 5000 lúmens',
+                                'Disponível até 23h',
+                                'Areia tratada',
+                                'Vestiários completos',
+                                'Segurança 24h'
+                            ],
+                            whatsapp: '5586995797982'
+                        },
+                        {
+                            title: 'Quadra Eventos',
+                            price: 'R$ 150/hora',
+                            rating: '5.0',
+                            image: 'https://media.istockphoto.com/id/2018147746/pt/foto/football-game-football-goal-with-a-net-beach-soccer.jpg?s=612x612&w=0&k=20&c=HGPwx2BF7SZBtiExNB25Pl8_bGW-6241Cjl74NrTU2Q=',
+                            image2: 'https://media.istockphoto.com/id/1225872726/pt/foto/handball-field-and-yellow-handball-cages-or-handball-goals.jpg?s=612x612&w=0&k=20&c=HQktdvA1mmc05iopLND-p3dQLLMzD3oN0VN-aN31Zx0=',
+                            fullDescription: 'Quadra premium preparada para torneios e eventos. Conta com arquibancada, placar eletrônico e toda infraestrutura necessária.',
+                            features: [
+                                'Arquibancada para 200 pessoas',
+                                'Placar eletrônico',
+                                'Sistema de som',
+                                'Camarins VIP',
+                                'Cobertura para chuva',
+                                'Transmissão ao vivo'
+                            ],
+                            whatsapp: '5586995797982'
+                        }
+                    ],
+                    features: [
+                        {
+                            icon: '🎾',
+                            title: 'Quadras Profissionais',
+                            description: 'Estrutura para competições com areia de alta qualidade'
+                        },
+                        {
+                            icon: '⚡',
+                            title: 'Iluminação Premium',
+                            description: 'Sistema LED de última geração para jogos noturnos perfeitos'
+                        },
+                        {
+                            icon: '📱',
+                            title: 'Reserva Online',
+                            description: 'Sistemas inteligentes de agendamento disponível 24/7'
+                        }
+                    ]
+                }
+            },
+            methods: {
+                openModal(court) {
+                    this.selectedCourt = court;
+                    document.body.style.overflow = 'hidden';
+                },
+                closeModal() {
+                    this.selectedCourt = null;
+                    document.body.style.overflow = 'auto';
+                },
+                contactWhatsApp(court) {
+                    const message = `Olá! Gostaria de saber sobre valores e formas de pagamento.`;
+                    const url = `https://wa.me/${court.whatsapp}?text=${encodeURIComponent(message)}`;
+                    window.open(url, '_blank');
+                },
+                handleReserva() {
+                    this.scrollToSection('quadras');
+                },
+                scrollToSection(sectionId) {
+                    const element = document.getElementById(sectionId);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
