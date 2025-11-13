@@ -38,7 +38,7 @@ const app = Vue.createApp({
                 };
                 localStorage.setItem('userLogado', JSON.stringify(userLogado));
 
-                window.location.href = 'http://127.0.0.1:5500/interface/index.html';
+                window.location.href = 'https://kere516.github.io/trabalhoLuizVue/interface/index.html';
                 
             } else {
                 this.msgError = 'Usuário ou senha incorretos';

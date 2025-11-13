@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="./css/signin.css" />
+    <title>Singin</title>
+    <style>
+        .error-input {
+            border-color: red !important;
+        }
+        .error-label {
+            color: red !important;
+        }
+        #msgError {
+            color: red;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="app"> 
+      <div class="card">
+        <h1>Entrar</h1>
+
+        <div id="msgError" v-if="msgError">{{ msgError }}</div>
+
+        <div class="label-float">
+          <input 
+            :class="{ 'error-input': msgError }" 
+            type="text" 
+            v-model="usuario" 
+            id="usuario" 
+            placeholder="" 
+            required 
+          /> 
+          <label 
+            :class="{ 'error-label': msgError }" 
+            id="userLabel" 
+            for="usuario">
+            Usuario
+          </label>
+        </div>
+
+        <div class="label-float">
+          <input 
+            :class="{ 'error-input': msgError }" 
+            :type="tipoSenha" 
+            v-model="senha" 
+            id="senha" 
+            placeholder="" 
+            required 
+          />
+          <label 
+            :class="{ 'error-label': msgError }" 
+            id="senhaLabel" 
+            for="senha">
+            Senha
+          </label>
+          <i class="fa fa-eye" aria-hidden="true" @click="toggleSenha"></i> 
+        </div>
+
+        <div class="justify-center">
+          <button @click="entrar">Entrar</button>
+        </div>
+
+        <div class="justify-center">
+          <hr />
+        </div>
+
+        <p>
+          Não tem uma conta?
+          <a href="./html/signup.html">
+            Cadastre-se
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> 
+    
+    <script src="../apagar-depois/js/signin.js"></script> 
+  </body>
+</html>
