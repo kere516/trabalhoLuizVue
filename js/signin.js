@@ -40,6 +40,7 @@ const app = Vue.createApp({
 
                 window.location.href = 'https://kere516.github.io/trabalhoLuizVue/interface/index.html';
                 
+                
             } else {
                 this.msgError = 'Usuário ou senha incorretos';
                 
