@@ -37,13 +37,13 @@ const app = Vue.createApp({
                     senha: userValid.senhaCad
                 };
                 localStorage.setItem('userLogado', JSON.stringify(userLogado));
-
+                console.log("rodou")
                 window.location.href = 'https://kere516.github.io/trabalhoLuizVue/interface/index.html';
                 
                 
             } else {
                 this.msgError = 'Usuário ou senha incorretos';
-                
+                console.log("a")
                 this.$nextTick(() => {
                     document.querySelector('#usuario').focus();
                 });
